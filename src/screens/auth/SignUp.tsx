@@ -17,7 +17,7 @@ import {useForm} from 'react-hook-form';
 import {View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {HOME_SCREEN} from 'core/constants/screen-names';
+import {HOME_SCREEN, SIGN_IN} from 'core/constants/screen-names';
 
 export default function SignUp() {
   const navigation = useNavigation<NativeStackNavigationProp<any, any>>();
@@ -78,18 +78,11 @@ export default function SignUp() {
 
       setAccessToken(res?.access_token);
       setLoggedIn(true);
-
-      // router.replace(`/(tabs)/home`);
-      // navigation.navigate('MyTabs');
     } else {
       alert(res?.message || 'Something went wrong. please try again');
     }
 
-    console.log('res :>> ', res?.success);
-
     setSubmitting(false);
-
-    //
   };
 
   return (
@@ -171,7 +164,7 @@ export default function SignUp() {
           </View>
           <AuthBottomAction
             onPress={() => {
-              // router.push(`/(auth)/sign-in`);
+              navigation.navigate(SIGN_IN);
             }}
             text={'Already have an Account?'}
             linkText={'Sign in'}

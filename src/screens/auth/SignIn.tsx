@@ -11,8 +11,6 @@ import useAuth from 'core/hooks/useAuth';
 import useApiClient from 'core/hooks/useClient';
 import User from 'core/models/user.model';
 import userService from 'core/services/user.service';
-import {family} from 'theme';
-import colors from 'theme/colors';
 import {height} from 'utils/dimensions';
 import {w} from 'utils/responsive';
 import React from 'react';
@@ -20,6 +18,7 @@ import {useForm} from 'react-hook-form';
 import {View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {SIGN_UP} from 'core/constants/screen-names';
 
 export default function SignIn() {
   const navigation = useNavigation<NativeStackNavigationProp<any, any>>();
@@ -71,9 +70,7 @@ export default function SignIn() {
         );
 
         await localStorage.setItem(storageKeys.NEWS_SESSION_ID, Date.now());
-      } catch (err) {
-        console.log('err :>> ', err);
-      }
+      } catch (err) {}
 
       setUser(profileUser);
 
@@ -83,8 +80,6 @@ export default function SignIn() {
     } else {
       alert(res?.message || 'Something went wrong. please try again');
     }
-
-    console.log('res :>> ', res?.success);
 
     setSubmitting(false);
   };
@@ -122,7 +117,6 @@ export default function SignIn() {
               }}
             />
           </View>
-
           <View>
             <PasswordInput
               name={'password'}
@@ -139,34 +133,6 @@ export default function SignIn() {
               }}
             />
           </View>
-
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              gap: w(4),
-            }}>
-            <AppText
-              style={{
-                fontSize: w(12),
-                fontWeight: '400',
-                lineHeight: w(16.6),
-              }}>
-              Forgot your password?
-            </AppText>
-            <AppText
-              onPress={() => {
-                // navigation.navigate(FORGOT_PASSWORD)
-              }}
-              style={{
-                color: colors.primary700,
-                fontFamily: family.Bold,
-                fontSize: w(12),
-                lineHeight: w(16.6),
-              }}>
-              Reset it
-            </AppText>
-          </View>
         </View>
 
         <View style={{gap: w(16)}}>
@@ -180,7 +146,7 @@ export default function SignIn() {
           </View>
           <AuthBottomAction
             onPress={() => {
-              // navigation.navigate(ACCOUNT_TYPE)
+              navigation.navigate(SIGN_UP);
             }}
             text={'Don’t have an Account?'}
             linkText={'Create an account'}
