@@ -17,6 +17,7 @@ import {useForm} from 'react-hook-form';
 import {View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {HOME_SCREEN} from 'core/constants/screen-names';
 
 export default function SignUp() {
   const navigation = useNavigation<NativeStackNavigationProp<any, any>>();
@@ -79,6 +80,7 @@ export default function SignUp() {
       setLoggedIn(true);
 
       // router.replace(`/(tabs)/home`);
+      // navigation.navigate('MyTabs');
     } else {
       alert(res?.message || 'Something went wrong. please try again');
     }

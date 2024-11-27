@@ -81,7 +81,7 @@ import {
   VideoCircle,
   Book,
   Lovely,
-  KyberNetwork,
+  Element3,
   Wifi,
   MoneyTick,
   ReceiptItem,
@@ -130,7 +130,7 @@ const getIconType = (icon: string) => {
     case 'explore':
       return Discover;
     case 'message':
-      return Message;
+      return Messages2;
     case 'account':
       return Profile;
     case 'add':
@@ -265,6 +265,8 @@ const getIconType = (icon: string) => {
       return Shop;
     case 'profile-cicle':
       return ProfileCircle;
+    case 'element-three':
+      return Element3;
     default:
       return null;
   }

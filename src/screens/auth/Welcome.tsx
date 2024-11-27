@@ -8,10 +8,9 @@ import MyAppButton from '../../components/Form/Button';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {SIGN_IN, SIGN_UP} from '../../core/constants/screen-names';
+import {techImages} from 'data/tech-imgs';
 
-// import {APP_VERSION} from 'core/constants/device-info';
-
-// const welcome_bg = require("../../assets/images/bg/welcome_bg.png");
+// const welcome_bg = require('../../assets/images/tech/03.jpeg');
 
 export default function Welcome() {
   const navigation = useNavigation<NativeStackNavigationProp<any, any>>();
@@ -30,15 +29,15 @@ export default function Welcome() {
               // backgroundColor: 'grey',
               // justifyContent: 'space-between',
             }}>
-            {/* <Image
+            <Image
               style={{
                 width: width - w(48),
-                height: "100%",
-                resizeMode: "contain",
-                alignSelf: "center",
+                height: '100%',
+                resizeMode: 'contain',
+                alignSelf: 'center',
               }}
-              source={welcome_bg}
-            /> */}
+              source={{uri: techImages[0]}}
+            />
           </View>
 
           <View style={{gap: w(12)}}>
@@ -51,7 +50,7 @@ export default function Welcome() {
                 // marginRight: 'auto',
                 color: '#262626',
               }}>
-              Join our community
+              Welcome to Flash Feed
             </AppText>
 
             <AppText
@@ -64,9 +63,7 @@ export default function Welcome() {
                 color: '#5D5D5D',
                 // textAlign: 'center',
               }}>
-              Join a network of agents committed to improving payment
-              experiences across communities, take the step towards a rewarding
-              future!
+              Stay Informed, Uncover the latest Stories with us!
             </AppText>
           </View>
         </View>

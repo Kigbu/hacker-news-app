@@ -3,15 +3,16 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {AppStackParamList} from './types';
 import BottomTab from './Tab/BottomTab';
-import navigatorId from 'core/constants/navigationId';
 import LoadingScreen from 'screens/loader/LoadingScreen';
+import {STORY_DETAILS} from 'core/constants/screen-names';
+import StoryDetails from 'screens/news/StoryDetails';
+import Header from 'components/Layout/Header';
 
 const Stack = createNativeStackNavigator<AppStackParamList>();
 
 export default function AppStack() {
   return (
     <Stack.Navigator
-      // id={navigatorId.MAIN_APP_STACK }
       screenOptions={{
         headerShown: false,
       }}
@@ -20,21 +21,11 @@ export default function AppStack() {
 
       <Stack.Screen name="MyTabs" component={BottomTab} />
 
-      {/* <Stack.Screen
-        name="AlertBox"
-        component={AlertBox}
-        options={{
-          presentation: 'transparentModal',
-          // animationEnabled: false,
-        }}
-      /> */}
-
-      {/*
       <Stack.Screen
-        name={OUTFIT_DETAILS}
-        component={OutfitDetails}
+        name={STORY_DETAILS}
+        component={StoryDetails}
         options={{
-          title: '',
+          title: 'Story Details',
           headerShown: true,
           header: ({navigation, route, options}: any) => (
             <Header
@@ -45,7 +36,7 @@ export default function AppStack() {
             />
           ),
         }}
-      /> */}
+      />
     </Stack.Navigator>
   );
 }

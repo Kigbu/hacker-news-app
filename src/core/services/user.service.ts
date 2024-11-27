@@ -1,5 +1,6 @@
 import {
-  generateAuthentication,
+  decryptUserData,
+  encryptUserData,
   generateSalt,
   hashPassword,
   mySecretKey,
@@ -8,26 +9,21 @@ import {
 import localStorage, {storageKeys} from '../config/storage';
 import User from '../models/user.model';
 import {uniqueId} from 'lodash';
-// import JWT from 'jsonwebtoken';
-import {jwtDecode} from 'jwt-decode';
 
 const getCurrentUserProfile = async (token: any) => {
   if (!token) return {success: false, user: null};
 
-  const _decode: any = jwtDecode(token);
+  const _decode: any = decryptUserData(token);
 
   let db: any[] =
     JSON.parse(await localStorage.getItem(storageKeys.USER_DB)) ?? [];
 
   const db_User = db.find(x => x.email === _decode?.email);
-  console.log('userExits :>> ', JSON.stringify(db_User, null, 4));
   if (!db_User)
     return {
       success: false,
       message: `User with ${_decode?.email} does not exists!`,
     };
-
-  console.log('_decode :>> ', _decode);
 
   return {success: true, user: db_User};
 };
@@ -73,7 +69,7 @@ const resiterUser = async (reqBody: any) => {
 
     await localStorage.setItem(storageKeys.USER_DB, JSON.stringify(db));
 
-    const access_token = generateAuthentication(new_user);
+    const access_token = encryptUserData(new_user);
 
     return {success: true, user: new_user, access_token: access_token};
   } catch (error) {
@@ -111,7 +107,7 @@ const loginUser = async (reqBody: any) => {
         message: `Invalid login credentials`,
       };
 
-    const access_token = generateAuthentication(db_User);
+    const access_token = encryptUserData(db_User);
 
     return {success: true, user: db_User, access_token: access_token};
   } catch (error) {

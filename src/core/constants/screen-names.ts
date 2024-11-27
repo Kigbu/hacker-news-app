@@ -21,11 +21,8 @@ export const EMAIL_VERIFICATION = 'EmailVerification';
 // Bottom Tab screens
 export const HOME_SCREEN = 'Home';
 export const ACCOUNT_SCREEN = 'Account';
-export const OUTFITS_SCREEN = 'Outfits';
-export const ORDERS_SCREEN = 'Orders';
-export const TAILORS_SCREEN = 'Tailors';
-export const SEARCH_OUTFITS = 'SearchOutfits';
-export const ORDER_OUTFIT = 'OrderOutfit';
+export const JOBS = 'Jobs';
+export const STORIES = 'Stories';
 
 //
 export const MADE_TO_MEASURE = 'MadaToMeasure';
@@ -33,7 +30,7 @@ export const CUSTOM_ORDERS = 'CustomOrders';
 
 // app stack
 export const ADD_OUTFIT = 'AddOutfit';
-export const OUTFIT_DETAILS = 'OutfitDetails';
+export const STORY_DETAILS = 'StoryDetails';
 export const MY_PROFILE = 'MyProfile';
 export const EDIT_PROFILE = 'EditProfile';
 export const SHOP_PROFILE = 'ShopProfile';

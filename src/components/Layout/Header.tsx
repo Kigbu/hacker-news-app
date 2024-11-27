@@ -14,6 +14,7 @@ import {h, w} from 'utils/responsive';
 import colors from 'theme/colors';
 import AppText from '../widgets/Text';
 import {family} from 'theme';
+import useAuth from 'core/hooks/useAuth';
 
 const statusBarHeight = Platform.OS === 'android' ? StatusBar.currentHeight : 0;
 
@@ -41,7 +42,7 @@ const Header: React.FC<HeaderProps> = ({
   onMorePress,
   bgColor,
 }: HeaderProps) => {
-  // const {userInfo} = useAuthContext();
+  const {user} = useAuth();
 
   const insets = useSafeAreaInsets();
 
@@ -108,7 +109,7 @@ const Header: React.FC<HeaderProps> = ({
                 lineHeight: w(24),
                 color: '#1F1F1F',
               }}>
-              {`Hi, ${'Jane'} 😊`}
+              {`Hi, ${user?.full_name || ''} 😊`}
             </AppText>
           </View>
         )}

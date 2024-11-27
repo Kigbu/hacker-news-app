@@ -36,12 +36,6 @@ const retrieveItem = async (key: any) => {
   try {
     const jsonObj = await AsyncStorage.getItem(key);
     return jsonObj != null ? JSON.parse(jsonObj) : null;
-
-    // if (isExpired(item)) {
-    //   // Command Query Separation (CQS)
-    //   await AsyncStorage.removeItem(key);
-    //   return null;
-    // }
   } catch (error) {
     L('getItem catch', error);
   }
@@ -58,10 +52,15 @@ const deleteItem = async (key: any) => {
   }
 };
 
+const clearStorage = async () => {
+  AsyncStorage.clear();
+};
+
 const localStorage = {
   setItem: storeItem,
   getItem: retrieveItem,
   removeItem: deleteItem,
+  clearStorage,
 };
 
 export default localStorage;

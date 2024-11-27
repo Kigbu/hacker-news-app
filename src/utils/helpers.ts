@@ -1,12 +1,5 @@
-import {sign} from 'react-native-pure-jwt';
-
 export const L = (...args: any) => {
   __DEV__ && console.log(...args);
-};
-
-export const priceFormater = (price: number | null | undefined) => {
-  if (!price) return 0;
-  return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 
 export const stringTruncate = (text: string, length: number) => {
@@ -74,14 +67,40 @@ export const verifyPassword = (
 
 export const mySecretKey = 'my-jwt-secret-key';
 
-export const generateAuthentication = (user: any) => {
-  const token = sign(
-    {
-      id: user.id,
-      email: user.email,
-    },
-    mySecretKey,
-    {alg: 'HS256'},
-  );
-  return token;
+export const encryptUserData = (user: any) => {
+  const userString = JSON.stringify(user); // Convert object to string
+  const key = mySecretKey;
+  let encrypted = '';
+
+  // XOR each character with the key
+  for (let i = 0; i < userString.length; i++) {
+    encrypted += String.fromCharCode(
+      userString.charCodeAt(i) ^ key.charCodeAt(i % key.length),
+    );
+  }
+
+  return btoa(encrypted); // Convert to Base64 for storage/transmission
+};
+
+export const decryptUserData = (encryptedData: any) => {
+  const key = mySecretKey;
+  const encrypted = atob(encryptedData);
+  let decrypted = '';
+
+  // XOR each character with the key
+  for (let i = 0; i < encrypted.length; i++) {
+    decrypted += String.fromCharCode(
+      encrypted.charCodeAt(i) ^ key.charCodeAt(i % key.length),
+    );
+  }
+
+  return JSON.parse(decrypted);
+};
+
+export const getRandomImageUrl = (imageUrls: string[]) => {
+  if (imageUrls.length === 0) {
+    throw new Error('The image URL array is empty.');
+  }
+  const randomIndex = Math.floor(Math.random() * imageUrls.length);
+  return imageUrls[randomIndex];
 };

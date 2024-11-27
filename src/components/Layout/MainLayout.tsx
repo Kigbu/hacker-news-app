@@ -1,12 +1,11 @@
 import React from 'react';
 import UserProvider from '../../core/contextStore/provider/user-provider';
-import {L} from 'utils/helpers';
+import {decryptUserData, L} from 'utils/helpers';
 import User from 'core/models/user.model';
 import localStorage, {storageKeys} from 'core/config/storage';
 import userService from 'core/services/user.service';
 import useApiClient from 'core/hooks/useClient';
 import SplashScreen from 'react-native-splash-screen';
-import {jwtDecode} from 'jwt-decode';
 import Routes from '../../navigation/Routes';
 import {WELCOEME} from 'core/constants/screen-names';
 
@@ -27,6 +26,7 @@ export default function MainLayout() {
 
   const initLoad = () => {
     // localStorage.removeItem(storageKeys.USER_DB);
+    // localStorage.clearStorage();
 
     Promise.all([getAuthParams()]).then(() => {
       setLoadingApp(false);
@@ -44,57 +44,51 @@ export default function MainLayout() {
       storageKeys.NEWS_ONBOARDING,
     );
 
-    L('storedEmail', storedEmail);
-    L('storedAccessToken', storedToken);
+    // L('storedEmail', storedEmail);
+    // L('storedAccessToken', storedToken);
 
     if (storedToken !== null) {
       setAccessToken(storedToken);
 
       await verifySession(storedToken);
     }
-    // router.replace("/(tabs)/home");
+
     if (storedEmail !== null) {
       setEmail(storedEmail);
     }
 
-    if (hasViewOnboarding !== null) {
-      L('hasViewOnboarding MAIN::', hasViewOnboarding);
+    // if (hasViewOnboarding !== null) {
+    //   L('hasViewOnboarding MAIN::', hasViewOnboarding);
 
-      setInitialAuthScreen('');
-    }
+    //   setInitialAuthScreen('');
+    // }
   };
 
   const verifySession = async (accessToken: any) => {
-    L('storedAccessToken Verify Session', accessToken);
-    const decoded: any = jwtDecode(accessToken);
+    const decoded: any = decryptUserData(accessToken);
     L('decoded Token::: ::: :::', JSON.stringify(decoded, null, 4));
-    // const _isExpired = Date.now() >= +decoded.exp * 1000;
 
     if (decoded?.email) {
       // get user profile
 
-      const {ok, user}: any = await userService.getCurrentUserProfile(
+      const {success, user}: any = await userService.getCurrentUserProfile(
         accessToken,
       );
 
-      if (ok) {
+      if (success) {
         const profileUser = new User({
           ...user,
           accessToken: accessToken,
         });
         setUser(profileUser);
-        L('data refresh user data ::::', JSON.stringify(user, null, 4));
 
         setLoggedIn(true);
-
-        // router.replace(`/(tabs)/home`);
       } else {
         await clearSession();
       }
     } else {
       L("Token does not contain 'exp' claim.");
     }
-    // return _isExpired;
   };
 
   const clearSession = async () => {
@@ -109,8 +103,6 @@ export default function MainLayout() {
     return null;
   }
 
-  console.log('loggedIn :>> ', loggedIn);
-
   return (
     <UserProvider
       setAccessToken={setAccessToken}
@@ -121,17 +113,6 @@ export default function MainLayout() {
       setLoggedIn={setLoggedIn}
       user={user}
       setUser={setUser}>
-      {/* <Stack
-          screenOptions={{ headerShown: false }}
-          // initialRouteName={loggedIn ? "(app-stack)" : "(auth)"}
-        >
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-
-          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-
-          <Stack.Screen name="+not-found" />
-        </Stack>
-        <StatusBar style="auto" /> */}
       <Routes email={email ? email : ''} accessToken={accessToken} />
     </UserProvider>
   );

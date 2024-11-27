@@ -2,11 +2,13 @@ import React from 'react';
 
 import {ButtomTabStackParamList} from 'navigation/types';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {ACCOUNT_SCREEN} from 'core/constants/screen-names';
+import {ACCOUNT_SCREEN, JOBS, STORIES} from 'core/constants/screen-names';
 import Account from 'screens/home/Account';
 import Header from 'components/Layout/Header';
 import BottomTabBar from 'components/Layout/BottomTabBar';
 import HomeScreen from 'screens/home/Home';
+import Jobs from 'screens/home/Jobs';
+import Stories from 'screens/home/Stories';
 
 const Stack = createBottomTabNavigator<ButtomTabStackParamList>();
 
@@ -22,8 +24,8 @@ export default function BottomTab() {
         name="Home"
         component={HomeScreen}
         options={{
-          title: 'Home',
-          tabBarLabel: 'home-two',
+          title: 'For You',
+          tabBarLabel: 'element-three',
           headerShown: true,
           header: ({navigation, route, options}) => (
             <Header
@@ -36,11 +38,17 @@ export default function BottomTab() {
         }}
       />
 
-      {/* <Stack.Screen
-        name={SEARCH_OUTFITS}
-        component={SearchOutfits}
-        options={{title: 'Search', tabBarLabel: 'search'}}
-      /> */}
+      <Stack.Screen
+        name={STORIES}
+        component={Stories}
+        options={{title: 'Stories', tabBarLabel: 'message'}}
+      />
+
+      <Stack.Screen
+        name={JOBS}
+        component={Jobs}
+        options={{title: 'Jobs', tabBarLabel: 'briefcase'}}
+      />
 
       <Stack.Screen
         name={ACCOUNT_SCREEN}

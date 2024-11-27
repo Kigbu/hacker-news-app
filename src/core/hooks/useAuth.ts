@@ -6,7 +6,7 @@ import User from '../models/user.model';
 import {L} from 'utils/helpers';
 
 const useAuth = () => {
-  const {setLoggedIn, setUser, setAccessToken, ...contextValues}: any =
+  const {setLoggedIn, user, setUser, setAccessToken, ...contextValues}: any =
     React.useContext(UserContext);
 
   const autoLogOutUser = async () => {
@@ -14,7 +14,6 @@ const useAuth = () => {
     const removeToken = async () => {
       localStorage.removeItem(storageKeys.NEWS_ACCESS_TOKEN);
       localStorage.removeItem(storageKeys.NEWS_USER_EMAIL);
-      localStorage.removeItem(storageKeys.NEWS_USER_PIN);
       localStorage.removeItem(storageKeys.LAST_LOGIN_TIMESTAMP);
     };
 
@@ -37,6 +36,7 @@ const useAuth = () => {
 
   return {
     setLoggedIn,
+    user,
     setUser,
     setAccessToken,
     autoLogOutUser,

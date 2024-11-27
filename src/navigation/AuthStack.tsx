@@ -25,25 +25,9 @@ export default function AuthStack({email}: AuthStackProps) {
       screenOptions={{
         headerShown: false,
       }}>
-      {/* <Stack.Screen
-        name={ONBOARDING}
-        component={Welcome}
-        //@ts-ignore
-        initialParams={{email: email}}
-      /> */}
-
       <Stack.Screen name={WELCOEME} component={Welcome} />
       <Stack.Screen name={SIGN_UP} component={SignUp} />
       <Stack.Screen name={SIGN_IN} component={SignIn} />
-
-      {/* <Stack.Screen
-        name="AlertBox"
-        component={AlertBox}
-        options={{
-          presentation: 'transparentModal',
-          // animationEnabled: false,
-        }}
-      /> */}
     </Stack.Navigator>
   );
 }

@@ -9,6 +9,7 @@ export default class Story {
   by!: string;
   kids!: any;
   score!: string;
+  imgUrl!: string;
 
   constructor(dto: any = null) {
     if (dto) {
