@@ -87,12 +87,7 @@ export default function SignIn() {
   return (
     <SafeAreaComp refreshing={false}>
       <View style={{minHeight: height, paddingVertical: w(32), gap: w(36)}}>
-        <AuthHeader
-          headText={'Sign in to account'}
-          subText={
-            'Connect with a network of fashion-forward clients; expand your reach and build a loyal clientele'
-          }
-        />
+        <AuthHeader headText={'Sign in to account'} subText={''} />
 
         <View style={{gap: w(16)}}>
           <View>

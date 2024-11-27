@@ -1,8 +1,8 @@
-import {h, w} from 'utils/responsive';
 import React, {useEffect, useRef} from 'react';
 import {Animated, Image, Modal, StyleSheet, View} from 'react-native';
+import {h, w} from 'utils/responsive';
 
-const icon = require('../../assets/images/loader_icon.png');
+const icon = require('assets/images/loader_icon.png');
 
 const LoadingComp = ({closeLoading}: any) => {
   const rotation = useRef(new Animated.Value(0)).current;
@@ -49,6 +49,7 @@ const LoadingComp = ({closeLoading}: any) => {
               width: w(40),
               height: w(40),
               transform: [{rotate}],
+              borderRadius: w(16),
             }}
           />
         </View>
@@ -63,13 +64,13 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(132, 138, 163, 0.42)',
+    backgroundColor: 'rgba(132, 138, 163, 0.70)',
   },
   lottieImageContainer: {
     width: w(138),
     height: h(120),
-    backgroundColor: '#fff',
-    borderRadius: w(9),
+    // backgroundColor: '#fff',
+    borderRadius: w(99),
     justifyContent: 'center',
     alignItems: 'center',
   },

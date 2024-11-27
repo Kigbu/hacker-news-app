@@ -88,12 +88,7 @@ export default function SignUp() {
   return (
     <SafeAreaComp refreshing={false}>
       <View style={{minHeight: height, paddingVertical: w(32), gap: w(36)}}>
-        <AuthHeader
-          headText={'Create your account'}
-          subText={
-            'Connect with a network of fashion-forward clients; expand your reach and build a loyal clientele'
-          }
-        />
+        <AuthHeader headText={'Create your account'} subText={''} />
 
         <View style={{gap: w(16)}}>
           <View>
